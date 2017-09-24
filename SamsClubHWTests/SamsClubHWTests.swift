@@ -49,7 +49,7 @@ class SamsClubHWTests: XCTestCase {
         
         server.getProductList(atPage: 0, length: 10) { (products, error) in
             
-            guard let firstProduct = products.first
+            guard let firstProduct = products.first as? Product
                 else { return }
             
             if firstProduct.productID != "" {
@@ -98,7 +98,36 @@ class SamsClubHWTests: XCTestCase {
         self.wait(for: Array(expectations.values), timeout: 5)
     }
     
-    
+    func testPagingProductlist() {
+        
+        let expectation = self.expectation(description: "Verify paging")
+        
+        var productsList = [SamProduct]()
+        
+        server.getProductList(atPage: 0, length: 10) { (products, error) in
+            guard error == nil
+                else { return }
+            productsList.append(contentsOf: products)
+            
+            self.server.getProductList(atPage: 1, length: 10, completion: { (nextProducts, error) in
+                productsList.append(contentsOf: nextProducts)
+                
+                if productsList.count == 20 {
+                    
+                    let first = productsList[0] as! Product
+                    let eleventh = productsList[10] as! Product
+                    
+                    if first.productID != eleventh.productID {
+                        expectation.fulfill()
+                    }
+                }
+                
+                print(productsList)
+            })
+        }
+        
+        self.wait(for: [expectation], timeout: 50)
+    }
     
     func testExample() {
         // This is an example of a functional test case.
