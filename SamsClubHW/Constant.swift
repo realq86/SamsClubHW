@@ -13,6 +13,8 @@ let kSamClubAPIKey = "ba8c4ec4-b5b9-4ece-8db2-9695361737b9"
 
 let kGetProductList = "/walmartproducts/\(kSamClubAPIKey)/"
 
+let kProducts = "products"
+
 let kProductID = "productId"
 let kProductName = "productName"
 let kShortDescription = "shortDescription"

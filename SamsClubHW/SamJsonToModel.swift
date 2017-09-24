@@ -17,7 +17,7 @@ class SamJsonToModel {
     static func productListFrom(_ jsonResponse: AnyObject?) throws -> [SamProduct]{
         var products = [SamProduct]()
         
-        guard let responseArray = jsonResponse as? [String:Any], let productsArray = responseArray["products"] as? [[String: AnyObject]]
+        guard let responseArray = jsonResponse as? [String:Any], let productsArray = responseArray[kProducts] as? [[String: AnyObject]]
             else {
                 throw JsonToModel.productListError
         }
@@ -30,7 +30,7 @@ class SamJsonToModel {
     }
 }
 
-class SamProduct {
+struct SamProduct {
     
     var productID: String
     var name: String
