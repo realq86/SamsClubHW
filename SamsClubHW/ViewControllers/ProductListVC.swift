@@ -115,7 +115,7 @@ extension ProductListVC: UIScrollViewDelegate {
         
         if !viewModel.isLoadingData.value {
             let scrollViewContentHeight = tableView.contentSize.height
-            let scrollOffsetLevel = scrollViewContentHeight - tableView.bounds.height*0.8
+            let scrollOffsetLevel = scrollViewContentHeight - tableView.bounds.height*1.5
             
             //Check user scrolling down
             let isDown = scrollView.panGestureRecognizer.translation(in: scrollView.superview).y < 0
