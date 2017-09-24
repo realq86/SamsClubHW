@@ -12,7 +12,7 @@ class ProductCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
     
-    var viewModel: ProductCellViewModelProtocol! {
+    var viewModel: ProductDisplay! {
         didSet {
             self.titleLabel.text = viewModel.name
         }
@@ -28,5 +28,5 @@ class ProductCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }

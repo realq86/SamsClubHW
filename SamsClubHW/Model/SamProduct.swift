@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol SamProductModelProtocol {
+protocol SamProduct {
     var name: String { get }
 }
 
-class SamProduct: SamProductModelProtocol {
+class Product: SamProduct {
     
     var productID: String
     var name: String

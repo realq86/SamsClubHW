@@ -12,10 +12,9 @@ class ProductListVC: UIViewController {
     
     let kTableViewCell = "ProductCell"
     
-    var viewModel:ProductListViewModelProtocol!
+    var viewModel:ProductListDisplay!
     var tableView:UITableView!
-//    var dataBackArray:[ProductCellViewModelProtocol]!
-    var dataBackArray: [ProductCellViewModelProtocol]!
+    var dataBackArray: [ProductDisplay]!
     
     override func viewDidLoad() {
         
@@ -104,7 +103,7 @@ extension ProductListVC: UITableViewDataSource {
 extension ProductListVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let assignment = viewModel.modelAt(indexPath.row) as! SamProductModelProtocol
+        let assignment = viewModel.modelAt(indexPath.row) as! SamProduct
         self.performSegue(withIdentifier: kSegueToProductDetail, sender: assignment)
     }
 }

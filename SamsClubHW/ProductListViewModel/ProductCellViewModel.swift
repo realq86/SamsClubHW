@@ -9,11 +9,11 @@
 import Foundation
 
 
-protocol ProductCellViewModelProtocol {
+protocol ProductDisplay {
     var name: String { get }
 }
 
-class ProductCellViewModel: ProductCellViewModelProtocol {
+class ProductCellViewModel: ProductDisplay {
     
     var name: String {
         get {
@@ -21,9 +21,9 @@ class ProductCellViewModel: ProductCellViewModelProtocol {
         }
     }
     
-    var model: SamProductModelProtocol!
+    var model: SamProduct!
     
-    init(model: SamProductModelProtocol) {
+    init(model: SamProduct) {
         self.model = model
     }
 }

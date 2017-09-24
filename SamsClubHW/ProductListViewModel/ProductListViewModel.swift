@@ -10,8 +10,8 @@ import Foundation
 
 let kMockNetworkDelaySec: Double = 1
 
-protocol ProductListViewModelProtocol {
-    var dataBackArray: DataBinder<[ProductCellViewModelProtocol]> { get }
+protocol ProductListDisplay {
+    var dataBackArray: DataBinder<[ProductDisplay]> { get }
     var isLoadingData: DataBinder<Bool> { get }
     init(dataProvider: SamServer)
     func fetchFreshModel(ifError: @escaping (Bool)->Void)
@@ -20,11 +20,11 @@ protocol ProductListViewModelProtocol {
     func addModel(_ model:Any)
 }
 
-class ProductListViewModel: ProductListViewModelProtocol {
+class ProductListViewModel: ProductListDisplay {
     
     fileprivate var currentPage = 1
     fileprivate var dataProvider: SamServer!
-    fileprivate var models: [SamProductModelProtocol] {
+    fileprivate var models: [SamProduct] {
         didSet {
             var tempArray = [ProductCellViewModel]()
             for model in models {
@@ -34,14 +34,14 @@ class ProductListViewModel: ProductListViewModelProtocol {
         }
     }
     
-    var dataBackArray: DataBinder<[ProductCellViewModelProtocol]>
+    var dataBackArray: DataBinder<[ProductDisplay]>
     
     var isLoadingData = DataBinder(value: false)
     
     required init(dataProvider: SamServer) {
         self.dataProvider = dataProvider
         self.dataBackArray = DataBinder(value: [ProductCellViewModel]())
-        self.models = [SamProductModelProtocol]()
+        self.models = [SamProduct]()
     }
     
     func fetchFreshModel(ifError: @escaping (Bool) -> Void) {
