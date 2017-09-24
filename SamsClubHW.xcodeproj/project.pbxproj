@@ -15,6 +15,9 @@
 		8BDAD92A1F7585E7009F7199 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BDAD9281F7585E7009F7199 /* LaunchScreen.storyboard */; };
 		8BDAD9351F7585E7009F7199 /* SamsClubHWTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD9341F7585E7009F7199 /* SamsClubHWTests.swift */; };
 		8BDAD9401F7585E7009F7199 /* SamsClubHWUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD93F1F7585E7009F7199 /* SamsClubHWUITests.swift */; };
+		8BDAD94E1F7587CA009F7199 /* SamServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD94D1F7587CA009F7199 /* SamServer.swift */; };
+		8BDAD9501F758997009F7199 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD94F1F758997009F7199 /* Constant.swift */; };
+		8BDAD9521F75BF25009F7199 /* SamJsonToModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD9511F75BF25009F7199 /* SamJsonToModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		8BDAD93B1F7585E7009F7199 /* SamsClubHWUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SamsClubHWUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BDAD93F1F7585E7009F7199 /* SamsClubHWUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamsClubHWUITests.swift; sourceTree = "<group>"; };
 		8BDAD9411F7585E7009F7199 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BDAD94D1F7587CA009F7199 /* SamServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamServer.swift; sourceTree = "<group>"; };
+		8BDAD94F1F758997009F7199 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		8BDAD9511F75BF25009F7199 /* SamJsonToModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamJsonToModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,9 @@
 				8BDAD9281F7585E7009F7199 /* LaunchScreen.storyboard */,
 				8BDAD92B1F7585E7009F7199 /* Info.plist */,
 				8BDAD9231F7585E7009F7199 /* SamsClubHW.xcdatamodeld */,
+				8BDAD94D1F7587CA009F7199 /* SamServer.swift */,
+				8BDAD9511F75BF25009F7199 /* SamJsonToModel.swift */,
+				8BDAD94F1F758997009F7199 /* Constant.swift */,
 			);
 			path = SamsClubHW;
 			sourceTree = "<group>";
@@ -262,8 +271,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BDAD9521F75BF25009F7199 /* SamJsonToModel.swift in Sources */,
 				8BDAD91F1F7585E7009F7199 /* ViewController.swift in Sources */,
 				8BDAD91D1F7585E7009F7199 /* AppDelegate.swift in Sources */,
+				8BDAD9501F758997009F7199 /* Constant.swift in Sources */,
+				8BDAD94E1F7587CA009F7199 /* SamServer.swift in Sources */,
 				8BDAD9251F7585E7009F7199 /* SamsClubHW.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
