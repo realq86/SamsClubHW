@@ -30,42 +30,6 @@ class SamJsonToModel {
     }
 }
 
-struct SamProduct {
-    
-    var productID: String
-    var name: String
-    var shortDescrip: NSAttributedString
-    var longDescrip: NSAttributedString
-    var price: String
-    var imageURL: URL?
-    var inStock: Bool
-    var reviewRating: Float?
-    var reviewCount: Int
-    
-    init(_ dic:[String: AnyObject]) {
-        
-        productID = dic[kProductID] as? String ?? ""
-        name = dic[kProductName] as? String ?? ""
-        
-        let shortDescripStr = dic[kShortDescription] as? String ?? ""
-        shortDescrip = StringFrom(html: shortDescripStr)
-        
-        let longDescripStr = dic[kLongDescription] as? String ?? ""
-        longDescrip = StringFrom(html: longDescripStr)
-        
-        price = dic[kPrice] as? String ?? "n\\a"
-        
-        imageURL = URL(string: dic[kImage] as? String ?? "")
-        
-        inStock = dic[kInStock] as? Bool ?? false
-        
-        reviewCount = dic[kReviewCount] as? Int ?? 0
-        if reviewCount > 0 {
-            reviewRating = dic[kReviewRating] as? Float ?? 0.0
-        }        
-    }
-}
-
 func StringFrom(html: String) -> NSAttributedString {
     
     guard let data = html.data(using: String.Encoding.utf8, allowLossyConversion: true)
