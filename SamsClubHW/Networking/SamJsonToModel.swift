@@ -23,7 +23,7 @@ class SamJsonToModel {
         }
         
         for eachProductDic in productsArray {
-            products.append(SamProduct(eachProductDic))
+            products.append(Product(eachProductDic))
         }
         
         return products
