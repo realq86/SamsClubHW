@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B13C9DD1F773AF400C47E29 /* DataBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B13C9DC1F773AF400C47E29 /* DataBinder.swift */; };
 		8BDAD91D1F7585E7009F7199 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD91C1F7585E7009F7199 /* AppDelegate.swift */; };
-		8BDAD91F1F7585E7009F7199 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD91E1F7585E7009F7199 /* ViewController.swift */; };
+		8BDAD91F1F7585E7009F7199 /* ProductListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD91E1F7585E7009F7199 /* ProductListVC.swift */; };
 		8BDAD9221F7585E7009F7199 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BDAD9201F7585E7009F7199 /* Main.storyboard */; };
 		8BDAD9251F7585E7009F7199 /* SamsClubHW.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD9231F7585E7009F7199 /* SamsClubHW.xcdatamodeld */; };
 		8BDAD9271F7585E7009F7199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BDAD9261F7585E7009F7199 /* Assets.xcassets */; };
@@ -18,6 +19,11 @@
 		8BDAD94E1F7587CA009F7199 /* SamServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD94D1F7587CA009F7199 /* SamServer.swift */; };
 		8BDAD9501F758997009F7199 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD94F1F758997009F7199 /* Constant.swift */; };
 		8BDAD9521F75BF25009F7199 /* SamJsonToModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDAD9511F75BF25009F7199 /* SamJsonToModel.swift */; };
+		8BF18DB91F773D2F00B4B696 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF18DB81F773D2F00B4B696 /* ProductListViewModel.swift */; };
+		8BF18DBB1F773D4900B4B696 /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF18DBA1F773D4900B4B696 /* ProductCellViewModel.swift */; };
+		8BF18DBE1F7748D500B4B696 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF18DBC1F7748D500B4B696 /* ProductCell.swift */; };
+		8BF18DBF1F7748D500B4B696 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BF18DBD1F7748D500B4B696 /* ProductCell.xib */; };
+		8BF18DC21F77620F00B4B696 /* SamProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF18DC11F77620F00B4B696 /* SamProduct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,9 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B13C9DC1F773AF400C47E29 /* DataBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBinder.swift; sourceTree = "<group>"; };
 		8BDAD9191F7585E7009F7199 /* SamsClubHW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SamsClubHW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BDAD91C1F7585E7009F7199 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8BDAD91E1F7585E7009F7199 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8BDAD91E1F7585E7009F7199 /* ProductListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListVC.swift; sourceTree = "<group>"; };
 		8BDAD9211F7585E7009F7199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8BDAD9241F7585E7009F7199 /* SamsClubHW.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SamsClubHW.xcdatamodel; sourceTree = "<group>"; };
 		8BDAD9261F7585E7009F7199 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,6 +62,11 @@
 		8BDAD94D1F7587CA009F7199 /* SamServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamServer.swift; sourceTree = "<group>"; };
 		8BDAD94F1F758997009F7199 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		8BDAD9511F75BF25009F7199 /* SamJsonToModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamJsonToModel.swift; sourceTree = "<group>"; };
+		8BF18DB81F773D2F00B4B696 /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
+		8BF18DBA1F773D4900B4B696 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
+		8BF18DBC1F7748D500B4B696 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		8BF18DBD1F7748D500B4B696 /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
+		8BF18DC11F77620F00B4B696 /* SamProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamProduct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,15 +118,17 @@
 			isa = PBXGroup;
 			children = (
 				8BDAD91C1F7585E7009F7199 /* AppDelegate.swift */,
-				8BDAD91E1F7585E7009F7199 /* ViewController.swift */,
+				8BF18DB71F773D1700B4B696 /* ViewControllers */,
+				8BF18DC31F77622300B4B696 /* Model */,
+				8BF18DB51F773CFE00B4B696 /* Networking */,
+				8BF18DC01F77491D00B4B696 /* TableViewCell */,
+				8BF18DB61F773D0C00B4B696 /* ProductListViewModel */,
+				8BDAD94F1F758997009F7199 /* Constant.swift */,
 				8BDAD9201F7585E7009F7199 /* Main.storyboard */,
 				8BDAD9261F7585E7009F7199 /* Assets.xcassets */,
 				8BDAD9281F7585E7009F7199 /* LaunchScreen.storyboard */,
-				8BDAD92B1F7585E7009F7199 /* Info.plist */,
 				8BDAD9231F7585E7009F7199 /* SamsClubHW.xcdatamodeld */,
-				8BDAD94D1F7587CA009F7199 /* SamServer.swift */,
-				8BDAD9511F75BF25009F7199 /* SamJsonToModel.swift */,
-				8BDAD94F1F758997009F7199 /* Constant.swift */,
+				8BDAD92B1F7585E7009F7199 /* Info.plist */,
 			);
 			path = SamsClubHW;
 			sourceTree = "<group>";
@@ -135,6 +149,50 @@
 				8BDAD9411F7585E7009F7199 /* Info.plist */,
 			);
 			path = SamsClubHWUITests;
+			sourceTree = "<group>";
+		};
+		8BF18DB51F773CFE00B4B696 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				8BDAD9511F75BF25009F7199 /* SamJsonToModel.swift */,
+				8BDAD94D1F7587CA009F7199 /* SamServer.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		8BF18DB61F773D0C00B4B696 /* ProductListViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8B13C9DC1F773AF400C47E29 /* DataBinder.swift */,
+				8BF18DB81F773D2F00B4B696 /* ProductListViewModel.swift */,
+				8BF18DBA1F773D4900B4B696 /* ProductCellViewModel.swift */,
+			);
+			path = ProductListViewModel;
+			sourceTree = "<group>";
+		};
+		8BF18DB71F773D1700B4B696 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8BDAD91E1F7585E7009F7199 /* ProductListVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8BF18DC01F77491D00B4B696 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8BF18DBC1F7748D500B4B696 /* ProductCell.swift */,
+				8BF18DBD1F7748D500B4B696 /* ProductCell.xib */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		8BF18DC31F77622300B4B696 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8BF18DC11F77620F00B4B696 /* SamProduct.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BDAD92A1F7585E7009F7199 /* LaunchScreen.storyboard in Resources */,
+				8BF18DBF1F7748D500B4B696 /* ProductCell.xib in Resources */,
 				8BDAD9271F7585E7009F7199 /* Assets.xcassets in Resources */,
 				8BDAD9221F7585E7009F7199 /* Main.storyboard in Resources */,
 			);
@@ -272,10 +331,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BDAD9521F75BF25009F7199 /* SamJsonToModel.swift in Sources */,
-				8BDAD91F1F7585E7009F7199 /* ViewController.swift in Sources */,
+				8BF18DBB1F773D4900B4B696 /* ProductCellViewModel.swift in Sources */,
+				8BDAD91F1F7585E7009F7199 /* ProductListVC.swift in Sources */,
 				8BDAD91D1F7585E7009F7199 /* AppDelegate.swift in Sources */,
+				8BF18DC21F77620F00B4B696 /* SamProduct.swift in Sources */,
 				8BDAD9501F758997009F7199 /* Constant.swift in Sources */,
+				8B13C9DD1F773AF400C47E29 /* DataBinder.swift in Sources */,
 				8BDAD94E1F7587CA009F7199 /* SamServer.swift in Sources */,
+				8BF18DBE1F7748D500B4B696 /* ProductCell.swift in Sources */,
+				8BF18DB91F773D2F00B4B696 /* ProductListViewModel.swift in Sources */,
 				8BDAD9251F7585E7009F7199 /* SamsClubHW.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
