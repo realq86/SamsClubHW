@@ -25,6 +25,9 @@ let kInStock = "inStock"
 let kReviewRating = "reviewRating"
 let kReviewCount = "reviewCount"
 
+let kGeneralNetowrkErrorMsg = "Network Error"
+
+let kSegueToProductDetail = "SegueToProductDetail"
 /*
 "productId":"31e1cb21-5504-4f02-885b-8f267131a93f",
 "productName":"VIZIO Class Full-Array LED Smart TV",
