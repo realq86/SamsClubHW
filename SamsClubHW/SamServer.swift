@@ -10,6 +10,7 @@ import Foundation
 
 enum APIError: Error {
     case badURLString(String)
+    case dataNilError
     case jsonParseError
 }
 
@@ -37,18 +38,21 @@ extension SamServer {
             
             var products = [SamProduct]()
             
+            //DataTask Error
             guard dataError == nil
                 else {
                     completion(products, dataError)
                     return
             }
         
+            //Nil Data
             guard let data = data
                 else {
-                    completion(products, nil)
+                    completion(products, APIError.dataNilError)
                     return
             }
             
+            //Json Parsing and Model Conversion
             do {
                 let jsonResponse = try self.parseJsonFrom(data)
                 products = try SamJsonToModel.productListFrom(jsonResponse)
