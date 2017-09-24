@@ -53,14 +53,14 @@ class ProductListViewModel: ProductListDisplay {
     
     func fetchNextPage(ifError: @escaping (Bool) -> Void) {
         isLoadingData.value = true
-        dataProvider.getProductList(atPage: currentPage, length: 10) { (products, error) in
+        dataProvider.getProductList(atPage: currentPage, length: 30) { (products, error) in
             DispatchQueue.main.asyncAfter(deadline: .now()+kMockNetworkDelaySec, execute: { [weak self] in
                 if error != nil {
                     ifError(true)
                     return
                 }
                 ifError(false)
-                self?.models = products
+                self?.models.append(contentsOf: products)
                 self?.currentPage += 1
                 self?.isLoadingData.value = false
             })
