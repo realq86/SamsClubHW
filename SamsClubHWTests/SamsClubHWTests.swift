@@ -11,6 +11,8 @@ import XCTest
 
 class SamsClubHWTests: XCTestCase {
     
+    let server = SamServer.shared
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -20,6 +22,83 @@ class SamsClubHWTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    func testGetProductListNotNil() {
+        
+        let expectation = self.expectation(description: "Response is not nil")
+        
+        server.getProductList(atPage: 1, length: 10) { (products, error) in
+            if error == nil {
+                expectation.fulfill()
+            }
+            else {
+                print(error?.localizedDescription ?? "")
+            }
+        }
+        
+        self.wait(for: [expectation], timeout: 5)
+    }
+    
+    func testGetProductListVarifyFirstProduct() {
+        
+        let expectationsName = ["ProductID", "Name", "Short", "Long", "Price", "ImageURL", "InStock", "Rating", "RatingCount"]
+        var expectations = [String: XCTestExpectation]()
+        for name in expectationsName {
+            expectations[name] = self.expectation(description: name)
+        }
+        
+        server.getProductList(atPage: 0, length: 10) { (products, error) in
+            
+            guard let firstProduct = products.first
+                else { return }
+            
+            if firstProduct.productID != "" {
+                print("PRODUCT ID = \(firstProduct.productID)")
+                expectations["ProductID"]!.fulfill()
+            }
+            
+            if firstProduct.name != "" {
+                expectations["Name"]!.fulfill()
+            }
+            
+            if firstProduct.shortDescrip != NSAttributedString(string: "") {
+                expectations["Short"]!.fulfill()
+            }
+            
+            if firstProduct.longDescrip != NSAttributedString(string: "") {
+                expectations["Long"]!.fulfill()
+            }
+            
+            if firstProduct.price != "" {
+                expectations["Price"]!.fulfill()
+            }
+            
+            if firstProduct.imageURL != URL(string: "") {
+                expectations["ImageURL"]!.fulfill()
+            }
+            
+            if firstProduct.inStock || !firstProduct.inStock  {
+                expectations["InStock"]!.fulfill()
+            }
+            
+            if let rating = firstProduct.reviewRating {
+                if rating >= 0 || rating <= 10 {
+                    expectations["Rating"]!.fulfill()
+                }
+            }
+            else {
+                expectations["Rating"]!.fulfill()
+            }
+
+            
+            if firstProduct.reviewCount >= 0 {
+                expectations["RatingCount"]!.fulfill()
+            }
+        }
+        self.wait(for: Array(expectations.values), timeout: 5)
+    }
+    
+    
     
     func testExample() {
         // This is an example of a functional test case.
