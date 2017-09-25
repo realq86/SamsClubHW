@@ -26,9 +26,9 @@ class ProductListViewModel: ProductListDisplay {
     fileprivate var dataProvider: SamServer!
     fileprivate var models: [SamProduct] {
         didSet {
-            var tempArray = [ProductCellViewModel]()
+            var tempArray = [ProductViewModel]()
             for model in models {
-                tempArray.append(ProductCellViewModel(model: model, dataProvider:dataProvider))
+                tempArray.append(ProductViewModel(model: model, dataProvider:dataProvider))
             }
             dataBackArray.value = tempArray
         }
