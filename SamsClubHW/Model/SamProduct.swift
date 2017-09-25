@@ -10,6 +10,13 @@ import Foundation
 
 protocol SamProduct {
     var name: String { get }
+    var shortDescrip: NSAttributedString { get }
+    var longDescrip: NSAttributedString { get }
+    var price: String { get }
+    var imageURL: URL? { get }
+    var inStock: Bool { get }
+    var reviewRating: Float? { get }
+    var reviewCount: Int { get }
 }
 
 class Product: SamProduct {
@@ -28,6 +35,7 @@ class Product: SamProduct {
         
         productID = dic[kProductID] as? String ?? ""
         name = dic[kProductName] as? String ?? ""
+//        name = StringFrom(html: nameHTML)
         
         let shortDescripStr = dic[kShortDescription] as? String ?? ""
         shortDescrip = StringFrom(html: shortDescripStr)
@@ -35,7 +43,7 @@ class Product: SamProduct {
         let longDescripStr = dic[kLongDescription] as? String ?? ""
         longDescrip = StringFrom(html: longDescripStr)
         
-        price = dic[kPrice] as? String ?? "n\\a"
+        price = dic[kPrice] as? String ?? ""
         
         imageURL = URL(string: dic[kImage] as? String ?? "")
         
