@@ -40,7 +40,7 @@ class ProductListViewModel: ProductListDisplay {
     
     required init(dataProvider: SamServer) {
         self.dataProvider = dataProvider
-        self.dataBackArray = DataBinder(value: [ProductCellViewModel]())
+        self.dataBackArray = DataBinder(value: [ProductViewModel]())
         self.models = [SamProduct]()
     }
     
