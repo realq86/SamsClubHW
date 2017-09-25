@@ -72,7 +72,7 @@ extension ProductListVC {
         //Delegate, dataSource, and size setup
         tableView.dataSource = controller
         tableView.delegate = controller
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 20
         tableView.rowHeight = UITableViewAutomaticDimension
         let nib = UINib(nibName: kTableViewCell, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: kTableViewCell)

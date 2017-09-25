@@ -34,7 +34,7 @@ class ProductCell: UITableViewCell {
                 self.shortDescripLabel.text = viewModel.shortDescrip.value.string
             }
             else {
-                self.shortDescripContainer.isHidden = true
+//                self.shortDescripLabel.isHidden = true
             }
             
             self.productImageView.image = #imageLiteral(resourceName: "placeHolder")
