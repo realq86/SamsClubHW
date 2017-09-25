@@ -74,6 +74,7 @@ extension ProductListVC {
         tableView.delegate = controller
         tableView.estimatedRowHeight = 20
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorStyle = .none
         let nib = UINib(nibName: kTableViewCell, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: kTableViewCell)
         
@@ -104,10 +105,20 @@ extension ProductListVC: UITableViewDataSource {
 
 // MARK: TableView Delegate
 extension ProductListVC: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let assignment = viewModel.modelAt(indexPath.row) as! SamProduct
-        self.performSegue(withIdentifier: kSegueToProductDetail, sender: assignment)
+        let product = viewModel.modelAt(indexPath.row) as! SamProduct
+        self.performSegue(withIdentifier: kSegueToProductDetail, sender: product)
+    }    
+}
+
+// MARK: - Navigation
+extension ProductListVC {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //Verify Segue ID and inject dependency into next VM and VC
+        if segue.identifier == kSegueToProductDetail {
+            let detailVC = segue.destination as! ProductDetailVC
+            detailVC.viewModel = ProductViewModel(model: sender as! Product, dataProvider: SamServer.shared)
+        }
     }
 }
 
@@ -134,7 +145,7 @@ extension ProductListVC: UIScrollViewDelegate {
             }
             
             //Pull to refresh
-            if scrollView.contentOffset.y < 0 && !isDown {
+            if scrollView.contentOffset.y < -(tableView.bounds.height*0.3) && !isDown {
                 viewModel.fetchFreshModel { [unowned self] (isError) in
                     if isError {
                         let alert = UIAlertController(title: kGeneralNetowrkErrorMsg, message: nil, preferredStyle: .alert)
