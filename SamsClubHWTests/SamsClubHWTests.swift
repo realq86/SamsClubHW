@@ -121,12 +121,81 @@ class SamsClubHWTests: XCTestCase {
                         expectation.fulfill()
                     }
                 }
-                
                 print(productsList)
             })
         }
-        
         self.wait(for: [expectation], timeout: 50)
+    }
+    
+    
+    func testCellVM() {
+        
+        let expect = self.expectation(description: "Verify CellVM Init")
+        
+        var pass = 0
+        
+        let dic = [kProductID: "123", kProductName: "TestName", kPrice: "$1000.91", kInStock: false, kReviewRating: 1.2, kReviewCount: 987] as [String : AnyObject]
+        
+        let productMock = Product(dic)
+        
+        let productVM = ProductCellViewModel(model: productMock)
+        
+        if productVM.name.value == "TestName" {
+            pass += 1
+        }
+        
+        if productVM.price.value == "$1000.91" {
+            pass += 1
+        }
+        
+        if productVM.inSTock.value == false {
+            pass += 1
+        }
+        
+        if productVM.reviewRating.value == 1.2 {
+            pass += 1
+        }
+        
+        print(pass)
+        if pass == 4 {
+            expect.fulfill()
+        }
+        
+        self.wait(for: [expect], timeout: 1)
+    }
+    
+    func testListANDCellVM() {
+        
+        let expect = self.expectation(description: "Verify ListVM to CellVM init")
+        
+        let listVM = ProductListViewModel(dataProvider: server)
+        
+        listVM.dataBackArray.bind(onChange: { (productVMs) in
+            guard !productVMs.isEmpty
+                else { return }
+            
+            let productVM = productVMs[0]
+            
+            if productVM.name.value == "" {
+                return
+            }
+            
+            if productVM.shortDescrip.value == NSAttributedString(string: "") {
+                return
+            }
+            
+            if productVM.price.value == "" {
+                return
+            }
+            expect.fulfill()
+        })
+        
+        listVM.fetchFreshModel { (ifError) in
+            guard ifError == false
+                else { return }
+        }
+        
+        self.wait(for: [expect], timeout: 50)
     }
     
     func testExample() {
