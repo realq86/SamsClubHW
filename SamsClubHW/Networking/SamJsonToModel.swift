@@ -32,12 +32,12 @@ class SamJsonToModel {
 
 func StringFrom(html: String) -> NSAttributedString {
     
-    guard let data = html.data(using: String.Encoding.utf8, allowLossyConversion: true)
+    guard let data = html.data(using: String.Encoding.utf16, allowLossyConversion: true)
         else { return NSAttributedString(string: "") }
     
     do {
         return try NSAttributedString(data: data,
-                                      options:[.documentType:NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+                                      options:[.documentType:NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf16.rawValue], documentAttributes: nil)
     }
     catch {
         return NSAttributedString(string: "")
