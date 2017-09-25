@@ -31,27 +31,27 @@ class Product: SamProduct {
     var reviewRating: Float?
     var reviewCount: Int
     
-    init(_ dic:[String: AnyObject]) {
+    init(_ dic:[String: AnyObject]?) {
         
-        productID = dic[kProductID] as? String ?? ""
-        name = dic[kProductName] as? String ?? ""
+        productID = dic?[kProductID] as? String ?? ""
+        name = dic?[kProductName] as? String ?? ""
 //        name = StringFrom(html: nameHTML)
         
-        let shortDescripStr = dic[kShortDescription] as? String ?? ""
+        let shortDescripStr = dic?[kShortDescription] as? String ?? ""
         shortDescrip = StringFrom(html: shortDescripStr)
         
-        let longDescripStr = dic[kLongDescription] as? String ?? ""
+        let longDescripStr = dic?[kLongDescription] as? String ?? ""
         longDescrip = StringFrom(html: longDescripStr)
         
-        price = dic[kPrice] as? String ?? ""
+        price = dic?[kPrice] as? String ?? ""
         
-        imageURL = URL(string: dic[kImage] as? String ?? "")
+        imageURL = URL(string: dic?[kImage] as? String ?? "")
         
-        inStock = dic[kInStock] as? Bool ?? false
+        inStock = dic?[kInStock] as? Bool ?? false
         
-        reviewCount = dic[kReviewCount] as? Int ?? 0
+        reviewCount = dic?[kReviewCount] as? Int ?? 0
         if reviewCount > 0 {
-            reviewRating = dic[kReviewRating] as? Float ?? 0.0
+            reviewRating = dic?[kReviewRating] as? Float ?? 0.0
         }
     }
 }
