@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum APIError: Error {
     case badURLString(String)
@@ -64,6 +65,22 @@ extension SamServer {
         }.resume()
     }
     
+    typealias ImageDownloadComplete = (UIImage?, Error?)->Void
+    func downloadImage(with url:URL, completion: @escaping ImageDownloadComplete) {
+        
+        urlSession.dataTask(with: url) { (data, response, error) in
+            if error != nil && data != nil{
+                completion(nil, error)
+                return
+            }
+            if let data = data {
+                let image = UIImage(data: data)
+                DispatchQueue.global().asyncAfter(deadline: .now(), execute: {
+                    completion(image, error)
+                })
+            }
+            }.resume()
+    }
     
     func parseJsonFrom(_ data:Data) throws -> AnyObject {
         do {
