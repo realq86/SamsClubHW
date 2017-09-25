@@ -28,7 +28,7 @@ class ProductListViewModel: ProductListDisplay {
         didSet {
             var tempArray = [ProductCellViewModel]()
             for model in models {
-                tempArray.append(ProductCellViewModel(model: model))
+                tempArray.append(ProductCellViewModel(model: model, dataProvider:dataProvider))
             }
             dataBackArray.value = tempArray
         }
