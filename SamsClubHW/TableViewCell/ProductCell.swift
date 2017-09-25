@@ -16,7 +16,6 @@ class ProductCell: UITableViewCell {
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var inStockLabel: UILabel!
     @IBOutlet var shortDescripLabel: UILabel!
-    @IBOutlet var shortDescripContainer: UIView!
     
     @IBOutlet var titleLabel: UILabel!
     
@@ -26,7 +25,6 @@ class ProductCell: UITableViewCell {
             if let rating = viewModel.reviewRating.value {
                 self.ratingLabel.text = String(rating)
             }
-            self.ratingLabel.text = ""
             self.priceLabel.text = viewModel.price.value
             self.inStockLabel.text = viewModel.inSTock.value ? "YES" : "NO"
             
@@ -34,7 +32,7 @@ class ProductCell: UITableViewCell {
                 self.shortDescripLabel.text = viewModel.shortDescrip.value.string
             }
             else {
-//                self.shortDescripLabel.isHidden = true
+                self.shortDescripLabel.isHidden = true
             }
             
             self.productImageView.image = #imageLiteral(resourceName: "placeHolder")

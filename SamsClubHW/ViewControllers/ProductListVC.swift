@@ -95,6 +95,9 @@ extension ProductListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kTableViewCell, for: indexPath) as! ProductCell
         cell.viewModel = dataBackArray[indexPath.row]
+        
+        cell.layoutIfNeeded()
+        
         return cell
     }
 }
