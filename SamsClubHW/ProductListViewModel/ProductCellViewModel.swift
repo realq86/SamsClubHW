@@ -19,13 +19,28 @@ protocol ProductDisplay {
 }
 
 class ProductCellViewModel: ProductDisplay {
+    
+    var dataProvider: SamServer
+    
     var name: DataBinder<String>
     
     var shortDescrip: DataBinder<NSAttributedString>
     
     var price: DataBinder<String>
     
-    var image: DataBinder<UIImage>
+    var downloaded = false
+    fileprivate var _image: DataBinder<UIImage>
+    var image: DataBinder<UIImage> {
+        get {
+            if !downloaded {
+                downloadImage()
+            }
+            return _image
+        }
+        set {
+            _image = newValue
+        }
+    }
     
     var inSTock: DataBinder<Bool>
     
@@ -33,16 +48,30 @@ class ProductCellViewModel: ProductDisplay {
     
     var model: SamProduct!
     
-    init(model: SamProduct) {
+    init(model: SamProduct, dataProvider: SamServer) {
+        self.dataProvider = dataProvider
         self.model = model
-        
         name = DataBinder(value: model.name)
         shortDescrip = DataBinder(value: model.shortDescrip)
         price = DataBinder(value: model.price)
-        image = DataBinder(value: #imageLiteral(resourceName: "placeHolder"))
+        _image = DataBinder(value: #imageLiteral(resourceName: "placeHolder"))
         inSTock = DataBinder(value: model.inStock)
         reviewRating = DataBinder(value: model.reviewRating)
     }
     
-    
+    func downloadImage() {
+        if downloaded {
+            return
+        }
+        if let url = model.imageURL {
+            dataProvider.downloadImage(with: url, completion: { (image, error) in
+                if let image = image {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.image.value = image
+                        self?.downloaded = true
+                    }
+                }
+            })
+        }
+    }
 }
