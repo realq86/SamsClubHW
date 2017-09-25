@@ -16,34 +16,36 @@ class ProductCell: UITableViewCell {
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var inStockLabel: UILabel!
     @IBOutlet var shortDescripLabel: UILabel!
+    @IBOutlet var ratingContainer: UIView!
+    @IBOutlet var inStockContainer: UIView!
     
     var viewModel: ProductDisplay! {
         didSet {
             
             //Bind Product Name to Label
-            viewModel.name.bind { (name) in
+            viewModel.name.bind { [unowned self] (name) in
                 self.productNameLabel.text = String(name.utf16)
             }
             
             //Bind Rating to Label
-            viewModel.reviewRating.bind { (rating) in
+            viewModel.reviewRating.bind { [unowned self] (rating) in
                 if let rating = rating {
-                    self.ratingLabel.text = String(rating)
+                    self.ratingLabel.text = String(format:"%.2f", rating)
                 }
             }
             
             //Bind Price to Label
-            viewModel.price.bind { (price) in
+            viewModel.price.bind { [unowned self] (price) in
                 self.priceLabel.text = price
             }
             
             //Bind inStock to Label
-            viewModel.inSTock.bind { (inStock) in
+            viewModel.inSTock.bind { [unowned self] (inStock) in
                 self.inStockLabel.text = inStock ? "YES" : "NO"
             }
             
             //Bind Short Description to Label
-            viewModel.shortDescrip.bind { (attributedString) in
+            viewModel.shortDescrip.bind { [unowned self] (attributedString) in
                 if attributedString.string != "" {
                     self.shortDescripLabel.text = attributedString.string
                 }
@@ -53,8 +55,8 @@ class ProductCell: UITableViewCell {
             }
 
             //Bind Image to UIImageView
-            viewModel.image.bind { [weak self] (image) in
-                self?.productImageView.image = self?.viewModel.image.value
+            viewModel.image.bind { [unowned self] (image) in
+                self.productImageView.image = image
             }
         }
     }
@@ -77,6 +79,17 @@ class ProductCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+//        self.contentView.layer.cornerRadius = 20
+        
+        self.productNameLabel.layer.cornerRadius = 5
+        self.productImageView.layer.cornerRadius = 5
+       
+        self.priceLabel.layer.cornerRadius = 5
+        self.shortDescripLabel.layer.cornerRadius = 5
+        
+        self.ratingContainer.layer.cornerRadius = 5
+        self.inStockContainer.layer.cornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
