@@ -138,7 +138,7 @@ class SamsClubHWTests: XCTestCase {
         
         let productMock = Product(dic)
         
-        let productVM = ProductViewModel(model: productMock)
+        let productVM = ProductViewModel(model: productMock, dataProvider:server)
         
         if productVM.name.value == "TestName" {
             pass += 1
