@@ -23,6 +23,7 @@ class ProductCell: UITableViewCell {
     var originalCenter = CGPoint()
     var deleteOnDragRelease = false
     var completeOnDragRelease = false
+    var currentColor = UIColor.clear
     
     var viewModel: ProductDisplay! {
         didSet {
@@ -63,6 +64,8 @@ class ProductCell: UITableViewCell {
             viewModel.image.bind { [unowned self] (image) in
                 self.productImageView.image = image
             }
+            
+            
         }
     }
     
@@ -89,14 +92,13 @@ class ProductCell: UITableViewCell {
         
         self.productNameLabel.layer.cornerRadius = 5
         self.productImageView.layer.cornerRadius = 5
-       
-        self.priceLabel.layer.cornerRadius = 5
+//        self.priceLabel.layer.cornerRadius = 5
+//        self.ratingContainer.layer.cornerRadius = 5
+//        self.inStockContainer.layer.cornerRadius = 5
         self.shortDescripLabel.layer.cornerRadius = 5
-        
-        self.ratingContainer.layer.cornerRadius = 5
-        self.inStockContainer.layer.cornerRadius = 5
-        
+
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(userDidPanOnCell(_:)))
+        gesture.delegate = self
         self.addGestureRecognizer(gesture)
         
     }
