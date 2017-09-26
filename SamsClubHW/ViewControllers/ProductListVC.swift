@@ -100,10 +100,12 @@ extension ProductListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kTableViewCell, for: indexPath) as! ProductCell
         cell.viewModel = viewModel.dataBackArray.value[indexPath.row]
-//        cell.contentView.backgroundColor = viewModel.color(at: indexPath.row)
-        cell.currentColor = viewModel.color(at: indexPath.row)
-        cell.layoutIfNeeded()
+        cell.subContentView.backgroundColor = viewModel.color(at: indexPath.row)
+//        cell.currentColor = viewModel.color(at: indexPath.row)
         
+        cell.delegate = self
+        
+        cell.layoutIfNeeded()
         return cell
     }
 }
@@ -130,7 +132,7 @@ extension ProductListVC: ProductCellDelegate {
     }
 }
 
-// MARK: Load next page
+// MARK: - Load next page
 extension ProductListVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

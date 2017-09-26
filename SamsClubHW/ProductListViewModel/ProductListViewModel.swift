@@ -108,13 +108,13 @@ class ProductListViewModel: ProductListDisplay {
     }
 
     func color(at index: Int) -> UIColor {
-        let count = dataBackArray.value.count
-        var gradiant = CGFloat(Float(index)*1.2)/CGFloat(count)*0.6
-    
-        var alpha = (1 - gradiant)
-//        alpha = 1
-        return UIColor(red: 78/255, green: 147/255, blue: 48/255, alpha: alpha*0.7)
+        let count = Float(dataBackArray.value.count)
+        
+        let indexFloat = Float(index)
+        let stepConstant: Float = 0.4
+        let gradiant = CGFloat(count / (count-indexFloat*stepConstant) )
+        
+        return UIColor(red: (78*gradiant)/255, green: (147*gradiant)/255, blue: (48*gradiant)/255, alpha: 1)
     }
-    
-    
+
 }
