@@ -88,6 +88,12 @@ class ProductListViewModel: ProductListDisplay {
         return nil
     }
     
+    func removeData(at index: Int) {
+        if index < self.models.count {
+            self.dataBackArray.value.remove(at: index)
+        }
+    }
+    
     func addModel(_ model: Any) {
         //UNUSED
     }
