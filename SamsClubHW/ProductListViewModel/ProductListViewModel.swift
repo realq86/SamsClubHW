@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 let kMockNetworkDelaySec: Double = 0
+let kDownloadPageSize = 10
 
 protocol ProductListDisplay {
     var dataBackArray: DataBinder<[ProductDisplay]> { get }
@@ -64,7 +65,7 @@ class ProductListViewModel: ProductListDisplay {
         }
         
         isLoadingData.value = true
-        dataProvider.getProductList(atPage: currentPage, length: 3) { (products, error) in
+        dataProvider.getProductList(atPage: currentPage, length: kDownloadPageSize) { (products, error) in
             DispatchQueue.main.asyncAfter(deadline: .now()+kMockNetworkDelaySec, execute: { [weak self] in
                 if error != nil {
                     ifError(true)
