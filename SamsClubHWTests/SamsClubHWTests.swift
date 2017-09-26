@@ -164,7 +164,7 @@ class SamsClubHWTests: XCTestCase {
         self.wait(for: [expect], timeout: 1)
     }
     
-    func testListANDCellVM() {
+    func testfetchFreshModel() {
         
         let expect = self.expectation(description: "Verify ListVM to CellVM init")
         
