@@ -18,6 +18,7 @@ protocol ProductListDisplay {
     func fetchFreshModel(ifError: @escaping (Bool)->Void)
     func fetchNextPage(ifError: @escaping (Bool)->Void)
     func modelAt(_ index: Int) -> AnyObject?
+    func removeData(at index: Int)
     func addModel(_ model:Any)
     func color(at index: Int) -> UIColor
 }
