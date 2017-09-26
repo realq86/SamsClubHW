@@ -132,13 +132,10 @@ extension ProductListVC: UIScrollViewDelegate {
             
             //Load next page
             if scrollView.contentOffset.y > scrollOffsetLevel && isDown && !isDownloading {
-                if let indexPath = tableView.indexPathsForVisibleRows?.first {
-                    viewModel.fetchNextPage { [unowned self] (isError) in
-                        if isError {
-                            let alert = UIAlertController(title: kGeneralNetowrkErrorMsg, message: nil, preferredStyle: .alert)
-                            self.present(alert, animated: true)
-                        }
-
+                viewModel.fetchNextPage { [unowned self] (isError) in
+                    if isError {
+                        let alert = UIAlertController(title: kGeneralNetowrkErrorMsg, message: nil, preferredStyle: .alert)
+                        self.present(alert, animated: true)
                     }
                 }
             }
