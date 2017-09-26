@@ -84,12 +84,14 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="In Stock?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ivk-VR-LSh">
                                                 <rect key="frame" x="0.0" y="0.0" width="51" height="277.5"/>
+                                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="inStock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-9a-AbV" userLabel="inStock">
                                                 <rect key="frame" x="0.0" y="0.0" width="223.5" height="277.5"/>
+                                                <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -119,6 +121,7 @@
                     </stackView>
                 </subviews>
                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                <gestureRecognizers/>
                 <constraints>
                     <constraint firstItem="Mf6-Ss-KOY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="UTb-mT-qaQ"/>
                     <constraint firstItem="BXs-pD-xy3" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.2" id="Vua-4m-4TU"/>
@@ -130,6 +133,7 @@
                     <constraint firstItem="BXs-pD-xy3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="xFu-ns-zoP"/>
                 </constraints>
             </tableViewCellContentView>
+            <gestureRecognizers/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="inStockContainer" destination="ukk-xG-Yya" id="ArW-so-Goa"/>

@@ -19,6 +19,11 @@ class ProductCell: UITableViewCell {
     @IBOutlet var ratingContainer: UIView!
     @IBOutlet var inStockContainer: UIView!
     
+    //Property for Swip
+    var originalCenter = CGPoint()
+    var deleteOnDragRelease = false
+    var completeOnDragRelease = false
+    
     var viewModel: ProductDisplay! {
         didSet {
             
@@ -90,6 +95,10 @@ class ProductCell: UITableViewCell {
         
         self.ratingContainer.layer.cornerRadius = 5
         self.inStockContainer.layer.cornerRadius = 5
+        
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(userDidPanOnCell(_:)))
+        self.addGestureRecognizer(gesture)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -98,4 +107,56 @@ class ProductCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func userDidPanOnCell(_ recognizer: UIPanGestureRecognizer) {
+        
+        let tranlation = recognizer.translation(in: self)
+        
+        switch recognizer.state {
+        case .began:
+            originalCenter = center
+            break
+        case .changed:
+            
+            center = CGPoint(x: originalCenter.x+tranlation.x, y: originalCenter.y)
+            deleteOnDragRelease = frame.origin.x < -frame.size.width / 2.0
+            completeOnDragRelease = frame.origin.x > frame.size.width/2.0
+            break
+        case .ended:
+            
+            if deleteOnDragRelease {
+//                if let todoItem = todoItem {
+//                    self.delegate?.userDeleted(at: todoItem)
+//                }
+                break
+            }
+            
+            if completeOnDragRelease {
+//                if let todoItem = todoItem {
+//                    self.delegate?.userComplted(at: todoItem)
+//                }
+                break
+            }
+            
+            let originalFrame = CGRect(x: 0, y: frame.origin.y, width: bounds.width, height: bounds.height)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.frame = originalFrame
+            })
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            let translation = gestureRecognizer.translation(in: superview)
+            
+            if fabs(translation.x) > fabs(translation.y) {
+                return true
+            }
+            return false
+        }
+        return false
+    }
 }
