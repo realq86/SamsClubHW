@@ -27,15 +27,16 @@ class ProductListViewModel: ProductListDisplay {
     
     fileprivate var currentPage = 1
     fileprivate var dataProvider: SamServer!
-    fileprivate var models: [SamProduct] {
-        didSet {
-            var tempArray = [ProductViewModel]()
-            for model in models {
-                tempArray.append(ProductViewModel(model: model, dataProvider:dataProvider))
-            }
-            dataBackArray.value = tempArray
-        }
-    }
+    fileprivate var models: [SamProduct]
+//    {
+//        didSet {
+//            var tempArray = [ProductViewModel]()
+//            for model in models {
+//                tempArray.append(ProductViewModel(model: model, dataProvider:dataProvider))
+//            }
+//            dataBackArray.value = tempArray
+//        }
+//    }
     
     var dataBackArray: DataBinder<[ProductDisplay]>
     
@@ -71,6 +72,12 @@ class ProductListViewModel: ProductListDisplay {
                 }
                 ifError(false)
                 self?.models.append(contentsOf: products)
+                var tempArray = [ProductDisplay]()
+                for product in products {
+                    let productVM = ProductViewModel(model: product, dataProvider: self!.dataProvider)
+                    tempArray.append(productVM)
+                }
+                self?.dataBackArray.value.append(contentsOf: tempArray)
                 self?.currentPage += 1
                 
                 //Give TableView a chance to layout before allowing next download.
