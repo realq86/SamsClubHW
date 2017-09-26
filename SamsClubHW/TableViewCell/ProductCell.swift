@@ -23,8 +23,9 @@ class ProductCell: UITableViewCell {
     @IBOutlet var shortDescripLabel: UILabel!
     @IBOutlet var ratingContainer: UIView!
     @IBOutlet var inStockContainer: UIView!
-    @IBOutlet var contentCenterConstraint: NSLayoutConstraint!
     
+    @IBOutlet var subContentLeading: NSLayoutConstraint!
+    @IBOutlet var subContentTrailing: NSLayoutConstraint!
     weak var delegate: ProductCellDelegate?
     
     //Property for Swip
@@ -93,7 +94,8 @@ class ProductCell: UITableViewCell {
         self.viewModel.image.onChange = nil
         
         //Resetting cell back from deleted state
-        contentCenterConstraint.constant = 0
+        subContentLeading.constant = 0
+        subContentTrailing.constant = 0
         subContentView.alpha = 1
     }
     
@@ -123,12 +125,12 @@ class ProductCell: UITableViewCell {
         
         switch recognizer.state {
         case .began:
-            originalCenterConstant = contentCenterConstraint.constant
+            originalCenterConstant = subContentLeading.constant
             break
 
         case .changed:
-            contentCenterConstraint.constant = originalCenterConstant+tranlation.x
-            
+            subContentLeading.constant = originalCenterConstant+tranlation.x
+            subContentTrailing.constant = originalCenterConstant-tranlation.x
             //Fade Cell on delete
             subContentView.alpha = 1+(tranlation.x/(subContentView.bounds.width*0.5))
 
@@ -144,7 +146,9 @@ class ProductCell: UITableViewCell {
                 break
             }
 
-            self.contentCenterConstraint.constant = self.originalCenterConstant
+            self.subContentLeading.constant = self.originalCenterConstant
+            self.subContentTrailing.constant = self.originalCenterConstant
+            
             UIView.animate(withDuration: 0.5, animations: {
                 self.subContentView.alpha = 1
                 self.layoutIfNeeded()
