@@ -13,8 +13,7 @@ class ProductListVC: UIViewController {
     let kTableViewCell = "ProductCell"
     
     var viewModel:ProductListDisplay!
-    var tableView:UITableView!
-    var isDownloading = false
+    fileprivate var tableView:UITableView!
     
     override func viewDidLoad() {
         
@@ -26,7 +25,6 @@ class ProductListVC: UIViewController {
         
         //Data bind to listen to changes to data array
         viewModel.dataBackArray.bind { [unowned self] (cellViewModels) in
-            self.isDownloading = false
             self.tableView.reloadData()
         }
         
@@ -39,9 +37,7 @@ class ProductListVC: UIViewController {
         }
         
         //Call fetch network on 1st load.
-        isDownloading = true
         viewModel.fetchFreshModel { [unowned self] (isError) in
-            self.isDownloading = false
             if isError {
                 let alert = UIAlertController(title: "NetworkError", message: nil, preferredStyle: .alert)
                 self.present(alert, animated: true)
@@ -142,7 +138,7 @@ extension ProductListVC: UIScrollViewDelegate {
             let isDown = scrollView.panGestureRecognizer.translation(in: scrollView.superview).y < 0
             
             //Load next page
-            if scrollView.contentOffset.y > scrollOffsetLevel && isDown && !isDownloading {
+            if scrollView.contentOffset.y > scrollOffsetLevel && isDown {
                 viewModel.fetchNextPage { [unowned self] (isError) in
                     if isError {
                         let alert = UIAlertController(title: kGeneralNetowrkErrorMsg, message: nil, preferredStyle: .alert)
@@ -152,10 +148,8 @@ extension ProductListVC: UIScrollViewDelegate {
             }
             
             //Pull to refresh
-            if scrollView.contentOffset.y < -(tableView.bounds.height*0.3) && !isDown && !isDownloading {
-                isDownloading = true
+            if scrollView.contentOffset.y < -(tableView.bounds.height*0.3) && !isDown {
                 viewModel.fetchFreshModel { [unowned self] (isError) in
-                    self.isDownloading = false
                     if isError {
                         let alert = UIAlertController(title: kGeneralNetowrkErrorMsg, message: nil, preferredStyle: .alert)
                         self.present(alert, animated: true)
