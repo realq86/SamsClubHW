@@ -103,45 +103,38 @@ class ProductCell: UITableViewCell {
         
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    // Animation for swip to delete and call delegate to complete delete
     @IBAction func userDidPanOnCell(_ recognizer: UIPanGestureRecognizer) {
         
         let tranlation = recognizer.translation(in: self)
         
         switch recognizer.state {
         case .began:
-            originalCenter = center
+            originalCenterConstant = contentCenterConstraint.constant
             break
+
         case .changed:
+            contentCenterConstraint.constant = originalCenterConstant+tranlation.x
             
-            center = CGPoint(x: originalCenter.x+tranlation.x, y: originalCenter.y)
-            deleteOnDragRelease = frame.origin.x < -frame.size.width / 2.0
-            completeOnDragRelease = frame.origin.x > frame.size.width/2.0
+            //Fade Cell on delete
+            subContentView.alpha = 1+(tranlation.x/(subContentView.bounds.width*0.5))
+
+            //Track if user have dragged left enough.
+            deleteOnDragRelease = subContentView.frame.origin.x < -frame.size.width / 2.0
+        
             break
+ 
         case .ended:
             
             if deleteOnDragRelease {
-//                if let todoItem = todoItem {
-//                    self.delegate?.userDeleted(at: todoItem)
-//                }
+                delegate?.userDeleted(cell: self)
                 break
             }
-            
-            if completeOnDragRelease {
-//                if let todoItem = todoItem {
-//                    self.delegate?.userComplted(at: todoItem)
-//                }
-                break
-            }
-            
-            let originalFrame = CGRect(x: 0, y: frame.origin.y, width: bounds.width, height: bounds.height)
+
+            self.contentCenterConstraint.constant = self.originalCenterConstant
             UIView.animate(withDuration: 0.5, animations: {
-                self.frame = originalFrame
+                self.subContentView.alpha = 1
+                self.layoutIfNeeded()
             })
             break
             
