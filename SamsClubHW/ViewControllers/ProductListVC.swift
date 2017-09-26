@@ -116,7 +116,19 @@ extension ProductListVC: UITableViewDelegate {
     }    
 }
 
+//MARK: - Delete Cell
+extension ProductListVC: ProductCellDelegate {
+    
+    func userDeleted(cell: UITableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell)
+            else { return }
 
+        tableView.beginUpdates()
+        viewModel.removeData(at:indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .left)
+        tableView.endUpdates()
+    }
+}
 
 // MARK: Load next page
 extension ProductListVC: UIScrollViewDelegate {
