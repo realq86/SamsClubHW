@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
-let kMockNetworkDelaySec: Double = 1
+let kMockNetworkDelaySec: Double = 0
 
 protocol ProductListDisplay {
     var dataBackArray: DataBinder<[ProductDisplay]> { get }
@@ -18,6 +19,7 @@ protocol ProductListDisplay {
     func fetchNextPage(ifError: @escaping (Bool)->Void)
     func modelAt(_ index: Int) -> AnyObject?
     func addModel(_ model:Any)
+    func color(at index: Int) -> UIColor
 }
 
 class ProductListViewModel: ProductListDisplay {
@@ -52,8 +54,15 @@ class ProductListViewModel: ProductListDisplay {
     }
     
     func fetchNextPage(ifError: @escaping (Bool) -> Void) {
+        
+        guard isLoadingData.value == false
+            else {
+                ifError(false)
+                return
+        }
+        
         isLoadingData.value = true
-        dataProvider.getProductList(atPage: currentPage, length: 10) { (products, error) in
+        dataProvider.getProductList(atPage: currentPage, length: 3) { (products, error) in
             DispatchQueue.main.asyncAfter(deadline: .now()+kMockNetworkDelaySec, execute: { [weak self] in
                 if error != nil {
                     ifError(true)
@@ -62,7 +71,11 @@ class ProductListViewModel: ProductListDisplay {
                 ifError(false)
                 self?.models.append(contentsOf: products)
                 self?.currentPage += 1
-                self?.isLoadingData.value = false
+                
+                //Give TableView a chance to layout before allowing next download.
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
+                    self?.isLoadingData.value = false
+                })
             })
         }
     }
@@ -79,4 +92,14 @@ class ProductListViewModel: ProductListDisplay {
         //UNUSED
     }
 
+    func color(at index: Int) -> UIColor {
+        let count = dataBackArray.value.count
+        var gradiant = CGFloat(Float(index)*1.2)/CGFloat(count)*0.6
+    
+        var alpha = (1 - gradiant)
+//        alpha = 1
+        return UIColor(red: 78/255, green: 147/255, blue: 48/255, alpha: alpha*0.7)
+    }
+    
+    
 }

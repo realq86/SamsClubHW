@@ -14,7 +14,8 @@ class ProductListVC: UIViewController {
     
     var viewModel:ProductListDisplay!
     var tableView:UITableView!
-    var dataBackArray: [ProductDisplay]!
+//    var dataBackArray: [ProductDisplay]!
+    var isDownloading = false
     
     override func viewDidLoad() {
         
@@ -26,7 +27,8 @@ class ProductListVC: UIViewController {
         
         //Data bind to listen to changes to data array
         viewModel.dataBackArray.bind { [unowned self] (cellViewModels) in
-            self.dataBackArray = cellViewModels
+//            self.dataBackArray = cellViewModels
+            self.isDownloading = false
             self.tableView.reloadData()
         }
         
@@ -39,7 +41,9 @@ class ProductListVC: UIViewController {
         }
         
         //Call fetch network on 1st load.
+        isDownloading = true
         viewModel.fetchFreshModel { [unowned self] (isError) in
+            self.isDownloading = false
             if isError {
                 let alert = UIAlertController(title: "NetworkError", message: nil, preferredStyle: .alert)
                 self.present(alert, animated: true)
@@ -90,13 +94,14 @@ extension ProductListVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataBackArray.count
+        return viewModel.dataBackArray.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kTableViewCell, for: indexPath) as! ProductCell
-        cell.viewModel = dataBackArray[indexPath.row]
-        
+        cell.viewModel = viewModel.dataBackArray.value[indexPath.row]
+//        cell.contentView.backgroundColor = viewModel.color(at: indexPath.row)
+        cell.currentColor = viewModel.color(at: indexPath.row)
         cell.layoutIfNeeded()
         
         return cell
@@ -120,24 +125,29 @@ extension ProductListVC: UIScrollViewDelegate {
         
         if !viewModel.isLoadingData.value {
             let scrollViewContentHeight = tableView.contentSize.height
-            let scrollOffsetLevel = scrollViewContentHeight - tableView.bounds.height*1.5
+            let scrollOffsetLevel = scrollViewContentHeight - tableView.bounds.height
             
             //Check user scrolling down
             let isDown = scrollView.panGestureRecognizer.translation(in: scrollView.superview).y < 0
             
             //Load next page
-            if scrollView.contentOffset.y > scrollOffsetLevel && isDown {
-                viewModel.fetchNextPage { [unowned self] (isError) in
-                    if isError {
-                        let alert = UIAlertController(title: kGeneralNetowrkErrorMsg, message: nil, preferredStyle: .alert)
-                        self.present(alert, animated: true)
+            if scrollView.contentOffset.y > scrollOffsetLevel && isDown && !isDownloading {
+                if let indexPath = tableView.indexPathsForVisibleRows?.first {
+                    viewModel.fetchNextPage { [unowned self] (isError) in
+                        if isError {
+                            let alert = UIAlertController(title: kGeneralNetowrkErrorMsg, message: nil, preferredStyle: .alert)
+                            self.present(alert, animated: true)
+                        }
+
                     }
                 }
             }
             
             //Pull to refresh
-            if scrollView.contentOffset.y < -(tableView.bounds.height*0.3) && !isDown {
+            if scrollView.contentOffset.y < -(tableView.bounds.height*0.3) && !isDown && !isDownloading {
+                isDownloading = true
                 viewModel.fetchFreshModel { [unowned self] (isError) in
+                    self.isDownloading = false
                     if isError {
                         let alert = UIAlertController(title: kGeneralNetowrkErrorMsg, message: nil, preferredStyle: .alert)
                         self.present(alert, animated: true)
