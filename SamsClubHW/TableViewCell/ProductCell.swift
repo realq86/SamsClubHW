@@ -91,6 +91,10 @@ class ProductCell: UITableViewCell {
         
         //Unbind the image download overservated as this cell is used for another model
         self.viewModel.image.onChange = nil
+        
+        //Resetting cell back from deleted state
+        contentCenterConstraint.constant = 0
+        subContentView.alpha = 1
     }
     
     override func awakeFromNib() {
