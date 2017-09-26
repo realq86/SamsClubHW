@@ -10,24 +10,26 @@ import UIKit
 
 class ProductDetailVC: UIViewController {
 
+    @IBOutlet var productNameLabel: UILabel!
     @IBOutlet var productImageView: UIImageView!
     @IBOutlet var ratingLabel: UILabel!
     @IBOutlet var ratingCountLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var inStockLabel: UILabel!
     @IBOutlet var longDescriptionLabel: UILabel!
+    @IBOutlet var longDescriptionContainer: UIView!
     
     var product:SamProduct!
     var viewModel: ProductDisplay = ProductViewModel(model:Product(nil), dataProvider: SamServer.shared)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+        longDescriptionContainer.layer.cornerRadius = 10
         
         //Bind product name to VC title
         viewModel.name.bind { [unowned self] (name) in
-            self.title = name
+            self.productNameLabel.text = name
         }
         
         //Bind Product Image
