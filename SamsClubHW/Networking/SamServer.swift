@@ -23,7 +23,6 @@ class SamServer {
 extension SamServer {
     
     typealias getProductsCompletion = ([SamProduct], Error?) -> Void
-    
     func getProductList(atPage page:Int, length:Int, completion:@escaping getProductsCompletion) {
         
         let urlString = kSamClubAPIBaseURL + kGetProductList + "\(page)" + "/\(length)"
