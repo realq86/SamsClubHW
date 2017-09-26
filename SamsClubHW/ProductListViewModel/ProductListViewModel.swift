@@ -18,7 +18,7 @@ protocol ProductListDisplay {
     init(dataProvider: SamServer)
     func fetchFreshModel(ifError: @escaping (Bool)->Void)
     func fetchNextPage(ifError: @escaping (Bool)->Void)
-    func modelAt(_ index: Int) -> AnyObject?
+    func modelAt(_ index: Int) -> SamProduct?
     func removeData(at index: Int)
     func addModel(_ model:Any)
     func color(at index: Int) -> UIColor
@@ -89,10 +89,10 @@ class ProductListViewModel: ProductListDisplay {
         }
     }
     
-    func modelAt(_ index: Int) -> AnyObject? {
+    func modelAt(_ index: Int) -> SamProduct? {
         if index < self.models.count {
             let model = self.models[index]
-            return model as AnyObject
+            return model as SamProduct
         }
         return nil
     }
