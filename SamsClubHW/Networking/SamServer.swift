@@ -27,7 +27,7 @@ extension SamServer {
     func getProductList(atPage page:Int, length:Int, completion:@escaping getProductsCompletion) {
         
         let urlString = kSamClubAPIBaseURL + kGetProductList + "\(page)" + "/\(length)"
-//        print("GetProducts = \(urlString)")
+        print("GetProducts = \(urlString)")
         guard let url = URL(string:urlString)
             else {
                 let error = APIError.badURLString(urlString)

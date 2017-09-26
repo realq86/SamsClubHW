@@ -23,12 +23,12 @@ class ProductCell: UITableViewCell {
     @IBOutlet var shortDescripLabel: UILabel!
     @IBOutlet var ratingContainer: UIView!
     @IBOutlet var inStockContainer: UIView!
-    
-    @IBOutlet var subContentLeading: NSLayoutConstraint!
-    @IBOutlet var subContentTrailing: NSLayoutConstraint!
+
     weak var delegate: ProductCellDelegate?
     
     //Property for Swip
+    @IBOutlet var subContentLeading: NSLayoutConstraint!
+    @IBOutlet var subContentTrailing: NSLayoutConstraint!
     var originalCenter = CGPoint()
     var originalCenterConstant: CGFloat = 0
     var deleteOnDragRelease = false
@@ -81,15 +81,12 @@ class ProductCell: UITableViewCell {
             viewModel.image.bind { [unowned self] (image) in
                 self.productImageView.image = image
             }
-            
-            
         }
     }
     
     override func prepareForReuse() {
         
         /* Resetting all field to empty and unlisten any async properties */
-        
         self.productNameLabel.text = ""
         self.ratingLabel.text = ""
         self.priceLabel.text = ""
@@ -108,7 +105,6 @@ class ProductCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
                 
         self.productNameLabel.layer.cornerRadius = 5
         self.productImageView.layer.cornerRadius = 5
@@ -120,7 +116,6 @@ class ProductCell: UITableViewCell {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(userDidPanOnCell(_:)))
         gesture.delegate = self
         self.addGestureRecognizer(gesture)
-        
     }
 
     // Animation for swip to delete and call delegate to complete delete

@@ -14,7 +14,6 @@ class ProductListVC: UIViewController {
     
     var viewModel:ProductListDisplay!
     var tableView:UITableView!
-//    var dataBackArray: [ProductDisplay]!
     var isDownloading = false
     
     override func viewDidLoad() {
@@ -27,7 +26,6 @@ class ProductListVC: UIViewController {
         
         //Data bind to listen to changes to data array
         viewModel.dataBackArray.bind { [unowned self] (cellViewModels) in
-//            self.dataBackArray = cellViewModels
             self.isDownloading = false
             self.tableView.reloadData()
         }
@@ -101,7 +99,6 @@ extension ProductListVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: kTableViewCell, for: indexPath) as! ProductCell
         cell.viewModel = viewModel.dataBackArray.value[indexPath.row]
         cell.subContentView.backgroundColor = viewModel.color(at: indexPath.row)
-//        cell.currentColor = viewModel.color(at: indexPath.row)
         
         cell.delegate = self
         

@@ -35,7 +35,6 @@ class Product: SamProduct {
         
         productID = dic?[kProductID] as? String ?? ""
         name = dic?[kProductName] as? String ?? ""
-//        name = StringFrom(html: nameHTML)
         
         let shortDescripStr = dic?[kShortDescription] as? String ?? ""
         shortDescrip = StringFrom(html: shortDescripStr)
