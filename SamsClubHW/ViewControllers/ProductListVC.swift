@@ -111,16 +111,7 @@ extension ProductListVC: UITableViewDelegate {
     }    
 }
 
-// MARK: - Navigation
-extension ProductListVC {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //Verify Segue ID and inject dependency into next VM and VC
-        if segue.identifier == kSegueToProductDetail {
-            let detailVC = segue.destination as! ProductDetailVC
-            detailVC.viewModel = ProductViewModel(model: sender as! Product, dataProvider: SamServer.shared)
-        }
-    }
-}
+
 
 // MARK: Load next page
 extension ProductListVC: UIScrollViewDelegate {
@@ -153,6 +144,17 @@ extension ProductListVC: UIScrollViewDelegate {
                     }
                 }
             }
+        }
+    }
+}
+
+// MARK: - Navigation
+extension ProductListVC {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //Verify Segue ID and inject dependency into next VM and VC
+        if segue.identifier == kSegueToProductDetail {
+            let detailVC = segue.destination as! ProductDetailVC
+            detailVC.viewModel = ProductViewModel(model: sender as! Product, dataProvider: SamServer.shared)
         }
     }
 }
