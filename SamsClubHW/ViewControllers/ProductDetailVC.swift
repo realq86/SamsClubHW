@@ -14,6 +14,7 @@ class ProductDetailVC: UIViewController {
     @IBOutlet var productImageView: UIImageView!
     @IBOutlet var ratingLabel: UILabel!
     @IBOutlet var ratingCountLabel: UILabel!
+    @IBOutlet var ratingContainer: UIView!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var inStockLabel: UILabel!
     @IBOutlet var longDescriptionLabel: UILabel!
@@ -41,6 +42,9 @@ class ProductDetailVC: UIViewController {
         viewModel.reviewRating.bind { [unowned self] (rating) in
             if let rating = rating {
                 self.ratingLabel.text = String(format:"%.2f", rating)
+            }
+            else {
+                self.ratingContainer.isHidden = true
             }
         }
         

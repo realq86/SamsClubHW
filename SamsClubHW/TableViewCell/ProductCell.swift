@@ -46,7 +46,11 @@ class ProductCell: UITableViewCell {
             //Bind Rating to Label
             viewModel.reviewRating.bind { [unowned self] (rating) in
                 if let rating = rating {
+                    self.ratingContainer.isHidden = false
                     self.ratingLabel.text = String(format:"%.2f", rating)
+                }
+                else{
+                    self.ratingContainer.isHidden = true
                 }
             }
             
@@ -58,6 +62,9 @@ class ProductCell: UITableViewCell {
             //Bind inStock to Label
             viewModel.inSTock.bind { [unowned self] (inStock) in
                 self.inStockLabel.text = inStock ? "YES" : "NO"
+                
+                //Set inStock to red for out of stock items.
+                self.inStockLabel.textColor = inStock ? .black : .red
             }
             
             //Bind Short Description to Label
@@ -102,14 +109,12 @@ class ProductCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-//        self.contentView.layer.cornerRadius = 20
-        
+                
         self.productNameLabel.layer.cornerRadius = 5
         self.productImageView.layer.cornerRadius = 5
-//        self.priceLabel.layer.cornerRadius = 5
-//        self.ratingContainer.layer.cornerRadius = 5
-//        self.inStockContainer.layer.cornerRadius = 5
+        self.priceLabel.layer.cornerRadius = 5
+        self.ratingContainer.layer.cornerRadius = 5
+        self.inStockContainer.layer.cornerRadius = 5
         self.shortDescripLabel.layer.cornerRadius = 5
 
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(userDidPanOnCell(_:)))
@@ -125,12 +130,16 @@ class ProductCell: UITableViewCell {
         
         switch recognizer.state {
         case .began:
+            
             originalCenterConstant = subContentLeading.constant
             break
 
         case .changed:
+            
+            //Change position of the contentView to the left
             subContentLeading.constant = originalCenterConstant+tranlation.x
             subContentTrailing.constant = originalCenterConstant-tranlation.x
+            
             //Fade Cell on delete
             subContentView.alpha = 1+(tranlation.x/(subContentView.bounds.width*0.5))
 
@@ -141,18 +150,20 @@ class ProductCell: UITableViewCell {
  
         case .ended:
             
+            //Call deleget when condition of swip to delete is met.
             if deleteOnDragRelease {
                 delegate?.userDeleted(cell: self)
                 break
             }
 
+            //Reset view back to original position if swip to delete is cancelled.
             self.subContentLeading.constant = self.originalCenterConstant
             self.subContentTrailing.constant = self.originalCenterConstant
-            
             UIView.animate(withDuration: 0.5, animations: {
                 self.subContentView.alpha = 1
                 self.layoutIfNeeded()
             })
+            
             break
             
         default:
@@ -160,6 +171,7 @@ class ProductCell: UITableViewCell {
         }
     }
     
+    //Resolve conflict with tabelview's own pan gesture.
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
             let translation = gestureRecognizer.translation(in: superview)

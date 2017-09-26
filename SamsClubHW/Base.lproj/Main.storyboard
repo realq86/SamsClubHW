@@ -238,6 +238,7 @@
                         <outlet property="priceLabel" destination="VXT-LH-USH" id="mgR-Xq-QL3"/>
                         <outlet property="productImageView" destination="PGE-3T-nSa" id="xvL-kA-sS7"/>
                         <outlet property="productNameLabel" destination="HTi-2C-U5c" id="BbY-gW-0J3"/>
+                        <outlet property="ratingContainer" destination="XDB-iv-3eR" id="42K-Vx-83d"/>
                         <outlet property="ratingCountLabel" destination="0Yx-d2-fof" id="vo2-hj-yUc"/>
                         <outlet property="ratingLabel" destination="H3j-vd-oiG" id="3jM-Mh-RzV"/>
                     </connections>
