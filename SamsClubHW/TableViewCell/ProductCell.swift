@@ -8,8 +8,13 @@
 
 import UIKit
 
-class ProductCell: UITableViewCell {
+protocol ProductCellDelegate:class {
+    func userDeleted(cell: UITableViewCell)
+}
 
+class ProductCell: UITableViewCell {
+    
+    @IBOutlet var subContentView: UIView!
     @IBOutlet var productImageView: UIImageView!
     @IBOutlet var productNameLabel: UILabel!
     @IBOutlet var ratingLabel: UILabel!
@@ -18,9 +23,13 @@ class ProductCell: UITableViewCell {
     @IBOutlet var shortDescripLabel: UILabel!
     @IBOutlet var ratingContainer: UIView!
     @IBOutlet var inStockContainer: UIView!
+    @IBOutlet var contentCenterConstraint: NSLayoutConstraint!
+    
+    weak var delegate: ProductCellDelegate?
     
     //Property for Swip
     var originalCenter = CGPoint()
+    var originalCenterConstant: CGFloat = 0
     var deleteOnDragRelease = false
     var completeOnDragRelease = false
     var currentColor = UIColor.clear
