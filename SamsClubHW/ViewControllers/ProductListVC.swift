@@ -98,7 +98,6 @@ extension ProductListVC: UITableViewDataSource {
         
         cell.delegate = self
         
-//        cell.layoutIfNeeded()
         return cell
     }
 }
