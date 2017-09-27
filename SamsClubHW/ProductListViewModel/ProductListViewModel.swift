@@ -51,6 +51,9 @@ class ProductListViewModel: ProductListDisplay {
     
     func fetchFreshModel(ifError: @escaping (Bool) -> Void) {
         self.currentPage = 1
+        self.models.removeAll()
+        self.dataBackArray.value.removeAll()
+        
         fetchNextPage { (error) in
             ifError(error)
         }
