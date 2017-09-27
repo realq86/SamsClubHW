@@ -29,15 +29,6 @@ class ProductListViewModel: ProductListDisplay {
     fileprivate var currentPage = 1
     fileprivate var dataProvider: SamServer!
     fileprivate var models: [SamProduct]
-//    {
-//        didSet {
-//            var tempArray = [ProductViewModel]()
-//            for model in models {
-//                tempArray.append(ProductViewModel(model: model, dataProvider:dataProvider))
-//            }
-//            dataBackArray.value = tempArray
-//        }
-//    }
     
     var dataBackArray: DataBinder<[ProductDisplay]>
     
